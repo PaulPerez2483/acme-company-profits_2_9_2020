@@ -1,0 +1,78 @@
+<html>
+	<head>
+		<meta name="view" content="width=device-width, initial-scale=1.0" />
+		<script
+			src="https://unpkg.com/react@16/umd/react.development.js"
+			crossorigin
+		></script>
+		<script
+			src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+			crossorigin
+		></script>
+		<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+		<script src="https://unpkg.com/react-router-dom/umd/react-router-dom.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
+		<script type="text/babel" src="app.js" defer></script>
+		<style>
+			body {
+				font-family: sans-serif;
+				color: black;
+			}
+			nav {
+				display: flex;
+				justify-content: space-around;
+			}
+
+			.selected {
+				background-color: tomato;
+				color: white;
+				padding: 0.25rem;
+				border-radius: 0.2rem;
+			}
+
+			#home {
+				padding: 10rem;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			#companiesPage {
+				display: flex;
+			}
+
+			#companiesPage > ul {
+				list-style-type: none;
+				flex: 1;
+			}
+
+			#companiesPage > ul > li {
+				margin-bottom: 1rem;
+			}
+
+			#companiesPage > div {
+				flex: 1;
+			}
+
+			.companyItem {
+				display: flex;
+				justify-content: space-between;
+				align-items: flex-end;
+				margin: 0.5rem 0;
+				border-bottom: solid 1px black;
+				padding: 0.5rem 0;
+			}
+
+			.year {
+				background-color: tomato;
+				color: white;
+				padding: 0.5rem;
+				border-radius: 0.2rem;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="root"></div>
+	</body>
+</html>
