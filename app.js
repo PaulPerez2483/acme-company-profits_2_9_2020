@@ -50,10 +50,51 @@ class Company extends Component {
 		};
 	}
 	componentDidUpdate(prevProps) {
-		console.log(prevProps);
+		// console.log(prevProps);
+		let pastId = prevProps.path.match.params.id;
+		let currentId = this.props.path.match.params.id;
+
+		if (pastId !== currentId) {
+			axios.get(`${API}/${currentId}/companyProfits`).then((response) => {
+				// console.log("data from company ID");
+				// console.log(response.data);
+				this.setState({
+					profits: response.data,
+					loading: false
+				});
+			});
+		}
+
+		console.log("past Id", pastId);
+		console.log("current Id", currentId);
 	}
+
+	componentDidMount() {
+		let currentId = this.props.path.match.params.id;
+		axios.get(`${API}/${currentId}/companyProfits`).then((response) => {
+			// console.log("data from company ID");
+			// console.log(response.data);
+			this.setState({
+				profits: response.data,
+				loading: false
+			});
+		});
+	}
+
 	render() {
-		return <div>hi</div>;
+		const { profits, loading } = this.state;
+		if (loading) return <div> Company ID loading</div>;
+		// console.log(profits);
+		return (
+			<ul>
+				{profits.map((profit) => (
+					<li key={profit.id}>
+						<p>{profit.fiscalYear}</p>
+						<p>{profit.amount}</p>
+					</li>
+				))}
+			</ul>
+		);
 	}
 }
 
@@ -82,15 +123,19 @@ class App extends Component {
 		return (
 			<HashRouter>
 				<Route render={(props) => <Nav path={props} companies={companies} />} />
+				<main>
+					<Route path='/profits' component={Profits} />
 
-				<Route path='/profits' component={Profits} />
+					<Route
+						path='/companies'
+						render={(props) => <Companies companies={companies} />}
+					/>
 
-				<Route
-					path='/companies'
-					render={(props) => <Companies companies={companies} />}
-				/>
-
-				<Route path='/companies/:id' component={Company} />
+					<Route
+						path='/companies/:id'
+						render={(props) => <Company path={props} />}
+					/>
+				</main>
 			</HashRouter>
 		);
 	}
